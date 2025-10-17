@@ -14,56 +14,56 @@ import productMessengerBag from "@/assets/product-messenger-bag.jpg";
 
 const products = [
   {
-    id: 1,
+    id: "1",
     name: "Premium Leather Backpack",
     category: "Bags & Backpacks",
     image: productBackpackLeather,
     price: "$129.99"
   },
   {
-    id: 2,
+    id: "2",
     name: "Classic Rubber Duck Toy",
     category: "Toys & Accessories",
     image: productDuckToy,
     price: "$9.99"
   },
   {
-    id: 3,
+    id: "3",
     name: "Genuine Leather Belt",
     category: "Accessories",
     image: productLeatherBelt,
     price: "$49.99"
   },
   {
-    id: 4,
+    id: "4",
     name: "White Canvas Sneakers",
     category: "Footwear",
     image: productWhiteSneakers,
     price: "$79.99"
   },
   {
-    id: 5,
+    id: "5",
     name: "Brown Leather Oxford Shoes",
     category: "Footwear",
     image: productBrownShoes,
     price: "$159.99"
   },
   {
-    id: 6,
+    id: "6",
     name: "Striped Storage Bag",
     category: "Storage & Organization",
     image: productStorageBag,
     price: "$24.99"
   },
   {
-    id: 7,
+    id: "7",
     name: "Blue Striped Cosmetic Pouch",
     category: "Beauty & Personal Care",
     image: productCosmeticPouch,
     price: "$19.99"
   },
   {
-    id: 8,
+    id: "8",
     name: "Tan Leather Messenger Bag",
     category: "Bags & Backpacks",
     image: productMessengerBag,
@@ -133,6 +133,7 @@ const Index = () => {
               {products.map((product) => (
                 <ProductCard
                   key={product.id}
+                  id={product.id}
                   name={product.name}
                   category={product.category}
                   image={product.image}

@@ -1,4 +1,9 @@
+import { Heart, ShoppingCart } from "lucide-react";
+import { useWishlist } from "@/contexts/WishlistContext";
+
 export const Header = () => {
+  const { wishlist, cart } = useWishlist();
+
   return (
     <header className="border-b border-border bg-background sticky top-0 z-50">
       <div className="container mx-auto px-4 py-4">
@@ -14,17 +19,20 @@ export const Header = () => {
             </ul>
           </div>
           <div className="flex items-center space-x-4">
-            <button 
-              className="text-sm text-foreground hover:text-foreground/70 transition-colors"
-              aria-label="Search"
+            <a 
+              href="/wishlist"
+              className="flex items-center gap-1 text-sm text-foreground hover:text-foreground/70 transition-colors"
+              aria-label="Wishlist"
             >
-              Search
-            </button>
+              <Heart size={18} />
+              <span>({wishlist.length})</span>
+            </a>
             <button 
-              className="text-sm text-foreground hover:text-foreground/70 transition-colors"
+              className="flex items-center gap-1 text-sm text-foreground hover:text-foreground/70 transition-colors"
               aria-label="Shopping cart"
             >
-              Cart (0)
+              <ShoppingCart size={18} />
+              <span>({cart.length})</span>
             </button>
           </div>
         </nav>
