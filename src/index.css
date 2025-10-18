@@ -1,83 +1,79 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(0, 0%, 10%);
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 10%;
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(0, 0%, 10%);
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(0, 0%, 10%);
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
+  --primary: hsl(0, 0%, 10%);
+  --primary-foreground: hsl(0, 0%, 98%);
 
-    --primary: 0 0% 10%;
-    --primary-foreground: 0 0% 98%;
+  --secondary: hsl(0, 0%, 96%);
+  --secondary-foreground: hsl(0, 0%, 10%);
 
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 10%;
+  --muted: hsl(0, 0%, 96%);
+  --muted-foreground: hsl(0, 0%, 45%);
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+  --accent: hsl(0, 0%, 96%);
+  --accent-foreground: hsl(0, 0%, 10%);
 
-    --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 10%;
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(0, 0%, 98%);
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+  --border: hsl(0, 0%, 90%);
+  --input: hsl(0, 0%, 90%);
+  --ring: hsl(0, 0%, 10%);
 
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 0 0% 10%;
+  --radius: 0.5rem;
 
-    --radius: 0.5rem;
-
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .dark {
-    --background: 0 0% 10%;
-    --foreground: 0 0% 98%;
-
-    --card: 0 0% 10%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 0 0% 10%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 10%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 98%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-
-    --accent: 0 0% 15%;
-    --accent-foreground: 0 0% 98%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 0 0% 83%;
-  }
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
+.dark {
+  --background: hsl(0, 0%, 10%);
+  --foreground: hsl(0, 0%, 98%);
 
-  body {
-    @apply bg-background text-foreground;
-  }
+  --card: hsl(0, 0%, 10%);
+  --card-foreground: hsl(0, 0%, 98%);
+
+  --popover: hsl(0, 0%, 10%);
+  --popover-foreground: hsl(0, 0%, 98%);
+
+  --primary: hsl(0, 0%, 98%);
+  --primary-foreground: hsl(0, 0%, 10%);
+
+  --secondary: hsl(0, 0%, 15%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+
+  --muted: hsl(0, 0%, 15%);
+  --muted-foreground: hsl(0, 0%, 65%);
+
+  --accent: hsl(0, 0%, 15%);
+  --accent-foreground: hsl(0, 0%, 98%);
+
+  --destructive: hsl(0, 63%, 31%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+
+  --border: hsl(0, 0%, 20%);
+  --input: hsl(0, 0%, 20%);
+  --ring: hsl(0, 0%, 83%);
+}
+
+/* Apply border color globally */
+* {
+  border-color: var(--border);
+  box-sizing: border-box;
+}
+
+/* Body background and text color */
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  margin: 0;
+  font-family: sans-serif;
+  transition: var(--transition-smooth);
 }

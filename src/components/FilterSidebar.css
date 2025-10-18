@@ -1,0 +1,111 @@
+.filter-sidebar {
+    width: 16rem;
+    border-right: 1px solid #e5e7eb;
+    background-color: #fff;
+    padding: 1.5rem;
+    overflow-y: auto;
+  }
+  
+  .filter-sidebar__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .filter-sidebar__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  /* Section toggle button */
+  .filter-sidebar__section-toggle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #111;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .filter-sidebar__section-toggle:hover {
+    color: #555;
+  }
+  
+  /* Section content */
+  .filter-sidebar__section-content {
+    padding-left: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .filter-sidebar__checkbox-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .filter-sidebar__checkbox {
+    width: 1rem;
+    height: 1rem;
+    border: 1px solid #3b82f6;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    cursor: pointer;
+  }
+  
+  .filter-sidebar__checkbox--checked {
+    background-color: #3b82f6;
+    color: #fff;
+  }
+  
+  .filter-sidebar__label {
+    font-size: 0.875rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  /* Unselect button */
+  .filter-sidebar__unselect {
+    font-size: 0.75rem;
+    color: #6b7280;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .filter-sidebar__unselect:hover {
+    color: #111;
+  }
+  
+  /* Placeholder for other sections */
+  .filter-sidebar__placeholder {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .filter-sidebar {
+      width: 14rem;
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .filter-sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 1px solid #e5e7eb;
+    }
+  }
+  
