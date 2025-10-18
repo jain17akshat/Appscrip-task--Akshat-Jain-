@@ -10,11 +10,15 @@ const Cart = () => {
   const { toast } = useToast();
 
   const handleCheckout = () => {
+    const itemCount = cart.length;
+    const totalAmount = total.toFixed(2);
+    
     toast({
       title: "Order Placed Successfully! 🎉",
-      description: "Your order has been placed. Thank you for shopping with us!",
+      description: `Your order of ${itemCount} item${itemCount > 1 ? 's' : ''} (Total: $${totalAmount}) has been placed. Thank you for shopping with us!`,
     });
-    // Clear cart after checkout
+    
+    // Clear all cart items after checkout
     cart.forEach(product => removeFromCart(product.id));
   };
 
