@@ -3,9 +3,20 @@ import { Footer } from "@/components/Footer";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Cart = () => {
   const { cart, removeFromCart } = useWishlist();
+  const { toast } = useToast();
+
+  const handleCheckout = () => {
+    toast({
+      title: "Order Placed Successfully! 🎉",
+      description: "Your order has been placed. Thank you for shopping with us!",
+    });
+    // Clear cart after checkout
+    cart.forEach(product => removeFromCart(product.id));
+  };
 
   const total = cart.reduce((sum, product) => {
     const price = product.price ? parseFloat(product.price.replace('$', '')) : 0;
@@ -91,7 +102,7 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <Button className="w-full">
+                  <Button className="w-full" onClick={handleCheckout}>
                     Proceed to Checkout
                   </Button>
                 </div>
