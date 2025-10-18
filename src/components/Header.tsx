@@ -27,13 +27,14 @@ export const Header = () => {
               <Heart size={18} />
               <span>({wishlist.length})</span>
             </a>
-            <button 
+            <a 
+              href="/cart"
               className="flex items-center gap-1 text-sm text-foreground hover:text-foreground/70 transition-colors"
               aria-label="Shopping cart"
             >
               <ShoppingCart size={18} />
               <span>({cart.length})</span>
-            </button>
+            </a>
           </div>
         </nav>
       </div>
