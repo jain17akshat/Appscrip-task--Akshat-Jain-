@@ -1,8 +1,16 @@
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
-import { ChevronDown, ChevronRight } from "lucide-react";
+import { FilterSidebar } from "@/components/FilterSidebar";
+import { ChevronDown, ChevronRight, ChevronLeft, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 // Product images
 import productBackpackLeather from "@/assets/product-backpack-leather.jpg";
@@ -74,6 +82,48 @@ const products = [
 ];
 
 const Index = () => {
+  const [showFilter, setShowFilter] = useState(false);
+  const [sortBy, setSortBy] = useState("recommended");
+  const [filters, setFilters] = useState({
+    customizable: false,
+    idealFor: [] as string[],
+  });
+
+  const sortOptions = [
+    { value: "recommended", label: "RECOMMENDED" },
+    { value: "newest", label: "NEWEST FIRST" },
+    { value: "popular", label: "POPULAR" },
+    { value: "price-high", label: "PRICE : HIGH TO LOW" },
+    { value: "price-low", label: "PRICE : LOW TO HIGH" },
+  ];
+
+  const getSortedProducts = () => {
+    let sorted = [...products];
+    
+    switch (sortBy) {
+      case "newest":
+        return sorted.reverse();
+      case "popular":
+        return sorted;
+      case "price-high":
+        return sorted.sort((a, b) => {
+          const priceA = parseFloat(a.price?.replace('$', '') || '0');
+          const priceB = parseFloat(b.price?.replace('$', '') || '0');
+          return priceB - priceA;
+        });
+      case "price-low":
+        return sorted.sort((a, b) => {
+          const priceA = parseFloat(a.price?.replace('$', '') || '0');
+          const priceB = parseFloat(b.price?.replace('$', '') || '0');
+          return priceA - priceB;
+        });
+      default:
+        return sorted;
+    }
+  };
+
+  const displayedProducts = getSortedProducts();
+  const currentSortLabel = sortOptions.find(opt => opt.value === sortBy)?.label || "RECOMMENDED";
   // JSON-LD structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
@@ -127,36 +177,72 @@ const Index = () => {
             <div className="container mx-auto px-4 py-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">
-                  <span className="text-sm font-semibold text-foreground">{products.length} ITEMS</span>
-                  <button className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    <ChevronRight size={16} />
-                    <span className="uppercase underline underline-offset-4">Show Filter</span>
+                  <span className="text-sm font-semibold text-foreground">{displayedProducts.length} ITEMS</span>
+                  <button 
+                    onClick={() => setShowFilter(!showFilter)}
+                    className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {showFilter ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+                    <span className="uppercase underline underline-offset-4">
+                      {showFilter ? 'Hide Filter' : 'Show Filter'}
+                    </span>
                   </button>
                 </div>
-                <button className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-foreground/70 transition-colors">
-                  <span className="uppercase">Recommended</span>
-                  <ChevronDown size={16} />
-                </button>
+                
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <button className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-foreground/70 transition-colors">
+                      <span className="uppercase">{currentSortLabel}</span>
+                      <ChevronDown size={16} />
+                    </button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56 bg-background border border-border">
+                    {sortOptions.map((option) => (
+                      <DropdownMenuItem
+                        key={option.value}
+                        onClick={() => setSortBy(option.value)}
+                        className="flex items-center justify-between cursor-pointer"
+                      >
+                        <span>{option.label}</span>
+                        {sortBy === option.value && <Check size={16} />}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             </div>
           </div>
 
           <section className="container mx-auto px-4 py-12" aria-labelledby="products-heading">
-            <h2 id="products-heading" className="sr-only">
-              Product Collection
-            </h2>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  id={product.id}
-                  name={product.name}
-                  category={product.category}
-                  image={product.image}
-                  price={product.price}
+            <div className="flex gap-8">
+              {/* Filter Sidebar */}
+              {showFilter && (
+                <FilterSidebar
+                  onClose={() => setShowFilter(false)}
+                  filters={filters}
+                  onFilterChange={setFilters}
                 />
-              ))}
+              )}
+
+              {/* Products Grid */}
+              <div className="flex-1">
+                <h2 id="products-heading" className="sr-only">
+                  Product Collection
+                </h2>
+            
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {displayedProducts.map((product) => (
+                    <ProductCard
+                      key={product.id}
+                      id={product.id}
+                      name={product.name}
+                      category={product.category}
+                      image={product.image}
+                      price={product.price}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </section>
         </main>
