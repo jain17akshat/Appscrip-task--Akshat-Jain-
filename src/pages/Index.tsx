@@ -1,6 +1,8 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Product images
 import productBackpackLeather from "@/assets/product-backpack-leather.jpg";
@@ -106,27 +108,42 @@ const Index = () => {
         
         <main className="flex-1">
           {/* Hero Section */}
-          <section className="bg-muted py-16 px-4" aria-labelledby="hero-heading">
-            <div className="container mx-auto text-center max-w-3xl">
+          <section className="bg-background py-20 px-4 border-b border-border" aria-labelledby="hero-heading">
+            <div className="container mx-auto text-center max-w-4xl">
               <h1 
                 id="hero-heading"
-                className="text-4xl md:text-5xl font-bold text-foreground mb-4"
+                className="text-5xl md:text-6xl font-light text-foreground mb-6 tracking-wide"
               >
-                Discover Our Products
+                DISCOVER OUR PRODUCTS
               </h1>
-              <p className="text-lg text-muted-foreground">
-                A curated selection of premium leather goods, footwear, and accessories crafted with exceptional quality
+              <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Lorem ipsum dolor sit amet consectetur. Amet est posuere rhoncus scelerisque. Dolor integer scelerisque nibh amet mi ut elementum dolor.
               </p>
             </div>
           </section>
 
-          {/* Products Grid */}
+          {/* Filter Bar */}
+          <div className="border-b border-border">
+            <div className="container mx-auto px-4 py-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <span className="text-sm font-semibold text-foreground">{products.length} ITEMS</span>
+                  <button className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    <ChevronRight size={16} />
+                    <span className="uppercase underline underline-offset-4">Show Filter</span>
+                  </button>
+                </div>
+                <button className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-foreground/70 transition-colors">
+                  <span className="uppercase">Recommended</span>
+                  <ChevronDown size={16} />
+                </button>
+              </div>
+            </div>
+          </div>
+
           <section className="container mx-auto px-4 py-12" aria-labelledby="products-heading">
-            <h2 
-              id="products-heading" 
-              className="text-2xl font-semibold text-foreground mb-8"
-            >
-              Featured Collection
+            <h2 id="products-heading" className="sr-only">
+              Product Collection
             </h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
