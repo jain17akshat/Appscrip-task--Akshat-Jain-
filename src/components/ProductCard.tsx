@@ -1,6 +1,5 @@
 import { Heart } from "lucide-react";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { Button } from "@/components/ui/button";
 
 interface ProductCardProps {
   id: string;
@@ -33,18 +32,16 @@ export const ProductCard = ({ id, name, image, category, price }: ProductCardPro
             loading="lazy"
             itemProp="image"
           />
-          <Button
+          <button
             onClick={handleAddToWishlist}
-            variant="outline"
-            size="icon"
-            className="absolute top-2 right-2 bg-background/80 backdrop-blur-sm hover:bg-background"
+            className="absolute top-2 right-2 h-10 w-10 inline-flex items-center justify-center rounded-md border border-input bg-background/80 backdrop-blur-sm hover:bg-accent hover:text-accent-foreground transition-colors"
             aria-label="Add to wishlist"
           >
             <Heart 
               size={18} 
               className={isInWishlist(id) ? "fill-primary text-primary" : ""} 
             />
-          </Button>
+          </button>
         </div>
         <div className="p-4">
           <h3 

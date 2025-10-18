@@ -1,6 +1,5 @@
 import { Heart, ShoppingCart, Search, User, Menu, Package } from "lucide-react";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { Button } from "@/components/ui/button";
 
 export const Header = () => {
   const { wishlist, cart } = useWishlist();

@@ -1,5 +1,4 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useToast } from '@/hooks/use-toast';
 
 export interface Product {
   id: string;
@@ -30,7 +29,6 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
     const saved = localStorage.getItem('cart');
     return saved ? JSON.parse(saved) : [];
   });
-  const { toast } = useToast();
 
   useEffect(() => {
     localStorage.setItem('wishlist', JSON.stringify(wishlist));
@@ -43,10 +41,6 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const addToWishlist = (product: Product) => {
     if (!wishlist.find(item => item.id === product.id)) {
       setWishlist([...wishlist, product]);
-      toast({
-        title: "Added to Wishlist",
-        description: `${product.name} has been added to your wishlist.`,
-      });
     }
   };
 
@@ -57,10 +51,6 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const addToCart = (product: Product) => {
     if (!cart.find(item => item.id === product.id)) {
       setCart([...cart, product]);
-      toast({
-        title: "Added to Cart",
-        description: `${product.name} has been added to your cart.`,
-      });
     }
   };
 

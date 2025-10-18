@@ -1,22 +1,15 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { Button } from "@/components/ui/button";
 import { ShoppingCart, Trash2 } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
 
 const Cart = () => {
   const { cart, removeFromCart } = useWishlist();
-  const { toast } = useToast();
 
   const handleCheckout = () => {
     const itemCount = cart.length;
     const totalAmount = total.toFixed(2);
-    
-    toast({
-      title: "Order Placed Successfully! 🎉",
-      description: `Your order of ${itemCount} item${itemCount > 1 ? 's' : ''} (Total: $${totalAmount}) has been placed. Thank you for shopping with us!`,
-    });
+    alert(`Order Placed Successfully! 🎉\n\nYour order of ${itemCount} item${itemCount > 1 ? 's' : ''} (Total: $${totalAmount}) has been placed. Thank you for shopping with us!`);
     
     // Clear all cart items after checkout
     cart.forEach(product => removeFromCart(product.id));
@@ -43,9 +36,12 @@ const Cart = () => {
               <ShoppingCart size={64} className="mx-auto text-muted-foreground mb-4" />
               <h2 className="text-xl font-semibold text-foreground mb-2">Your cart is empty</h2>
               <p className="text-muted-foreground mb-6">Add some products to get started!</p>
-              <Button asChild>
-                <a href="/">Continue Shopping</a>
-              </Button>
+              <a 
+                href="/"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-10 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                Continue Shopping
+              </a>
             </div>
           ) : (
             <div className="grid lg:grid-cols-3 gap-8">
@@ -76,13 +72,12 @@ const Cart = () => {
                         </p>
                       )}
                     </div>
-                    <Button 
+                    <button 
                       onClick={() => removeFromCart(product.id)}
-                      variant="outline"
-                      size="sm"
+                      className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-9 px-3 border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
                     >
                       <Trash2 size={16} />
-                    </Button>
+                    </button>
                   </article>
                 ))}
               </div>
@@ -106,9 +101,12 @@ const Cart = () => {
                       </div>
                     </div>
                   </div>
-                  <Button className="w-full" onClick={handleCheckout}>
+                  <button 
+                    onClick={handleCheckout}
+                    className="w-full inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-10 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                  >
                     Proceed to Checkout
-                  </Button>
+                  </button>
                 </div>
               </div>
             </div>

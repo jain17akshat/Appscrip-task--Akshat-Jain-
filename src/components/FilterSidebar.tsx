@@ -1,8 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, ChevronUp, ChevronLeft } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
+import { ChevronDown, ChevronUp, Check } from "lucide-react";
 
 interface FilterSidebarProps {
   onClose: () => void;
@@ -47,16 +44,19 @@ export const FilterSidebar = ({ onClose, filters, onFilterChange }: FilterSideba
         {/* Customizable */}
         <div className="space-y-2">
           <div className="flex items-center space-x-2">
-            <Checkbox
-              id="customizable"
-              checked={filters.customizable}
-              onCheckedChange={(checked) => 
-                onFilterChange({ ...filters, customizable: checked })
-              }
-            />
-            <Label htmlFor="customizable" className="text-sm font-medium cursor-pointer">
+            <button
+              onClick={() => onFilterChange({ ...filters, customizable: !filters.customizable })}
+              className="h-4 w-4 shrink-0 rounded-sm border border-primary flex items-center justify-center data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+              data-state={filters.customizable ? 'checked' : 'unchecked'}
+            >
+              {filters.customizable && <Check className="h-4 w-4" />}
+            </button>
+            <label 
+              onClick={() => onFilterChange({ ...filters, customizable: !filters.customizable })}
+              className="text-sm font-medium cursor-pointer"
+            >
               CUSTOMIZABLE
-            </Label>
+            </label>
           </div>
         </div>
 
@@ -76,38 +76,28 @@ export const FilterSidebar = ({ onClose, filters, onFilterChange }: FilterSideba
                 Unselect all
               </button>
               <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="all"
-                    checked={filters.idealFor.includes('all')}
-                    onCheckedChange={(checked) => handleIdealForChange('all', checked as boolean)}
-                  />
-                  <Label htmlFor="all" className="text-sm cursor-pointer">All</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="men"
-                    checked={filters.idealFor.includes('men')}
-                    onCheckedChange={(checked) => handleIdealForChange('men', checked as boolean)}
-                  />
-                  <Label htmlFor="men" className="text-sm cursor-pointer">Men</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="women"
-                    checked={filters.idealFor.includes('women')}
-                    onCheckedChange={(checked) => handleIdealForChange('women', checked as boolean)}
-                  />
-                  <Label htmlFor="women" className="text-sm cursor-pointer">Women</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox
-                    id="baby-kids"
-                    checked={filters.idealFor.includes('baby-kids')}
-                    onCheckedChange={(checked) => handleIdealForChange('baby-kids', checked as boolean)}
-                  />
-                  <Label htmlFor="baby-kids" className="text-sm cursor-pointer">Baby & Kids</Label>
-                </div>
+                {[
+                  { id: 'all', label: 'All' },
+                  { id: 'men', label: 'Men' },
+                  { id: 'women', label: 'Women' },
+                  { id: 'baby-kids', label: 'Baby & Kids' }
+                ].map(({ id, label }) => (
+                  <div key={id} className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handleIdealForChange(id, !filters.idealFor.includes(id))}
+                      className="h-4 w-4 shrink-0 rounded-sm border border-primary flex items-center justify-center data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground"
+                      data-state={filters.idealFor.includes(id) ? 'checked' : 'unchecked'}
+                    >
+                      {filters.idealFor.includes(id) && <Check className="h-4 w-4" />}
+                    </button>
+                    <label 
+                      onClick={() => handleIdealForChange(id, !filters.idealFor.includes(id))}
+                      className="text-sm cursor-pointer"
+                    >
+                      {label}
+                    </label>
+                  </div>
+                ))}
               </div>
             </div>
           )}

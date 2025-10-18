@@ -4,13 +4,6 @@ import { Footer } from "@/components/Footer";
 import { ProductCard } from "@/components/ProductCard";
 import { FilterSidebar } from "@/components/FilterSidebar";
 import { ChevronDown, ChevronRight, ChevronLeft, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 // Product images
 import productBackpackLeather from "@/assets/product-backpack-leather.jpg";
@@ -84,6 +77,7 @@ const products = [
 const Index = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [sortBy, setSortBy] = useState("recommended");
+  const [showDropdown, setShowDropdown] = useState(false);
   const [filters, setFilters] = useState({
     customizable: false,
     idealFor: [] as string[],
@@ -124,6 +118,7 @@ const Index = () => {
 
   const displayedProducts = getSortedProducts();
   const currentSortLabel = sortOptions.find(opt => opt.value === sortBy)?.label || "RECOMMENDED";
+  
   // JSON-LD structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
@@ -189,26 +184,32 @@ const Index = () => {
                   </button>
                 </div>
                 
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-foreground/70 transition-colors">
-                      <span className="uppercase">{currentSortLabel}</span>
-                      <ChevronDown size={16} />
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56 bg-background border border-border">
-                    {sortOptions.map((option) => (
-                      <DropdownMenuItem
-                        key={option.value}
-                        onClick={() => setSortBy(option.value)}
-                        className="flex items-center justify-between cursor-pointer"
-                      >
-                        <span>{option.label}</span>
-                        {sortBy === option.value && <Check size={16} />}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <div className="relative">
+                  <button 
+                    onClick={() => setShowDropdown(!showDropdown)}
+                    className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-foreground/70 transition-colors"
+                  >
+                    <span className="uppercase">{currentSortLabel}</span>
+                    <ChevronDown size={16} />
+                  </button>
+                  {showDropdown && (
+                    <div className="absolute right-0 mt-2 w-56 bg-background border border-border rounded-md shadow-lg z-50">
+                      {sortOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => {
+                            setSortBy(option.value);
+                            setShowDropdown(false);
+                          }}
+                          className="flex items-center justify-between w-full px-4 py-2 text-sm text-foreground hover:bg-accent transition-colors cursor-pointer"
+                        >
+                          <span>{option.label}</span>
+                          {sortBy === option.value && <Check size={16} />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

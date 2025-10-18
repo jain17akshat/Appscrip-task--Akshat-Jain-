@@ -1,7 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { Button } from "@/components/ui/button";
 import { Heart, ShoppingCart, Trash2 } from "lucide-react";
 
 const Wishlist = () => {
@@ -28,9 +27,12 @@ const Wishlist = () => {
               <Heart size={64} className="mx-auto text-muted-foreground mb-4" />
               <h2 className="text-xl font-semibold text-foreground mb-2">Your wishlist is empty</h2>
               <p className="text-muted-foreground mb-6">Start adding products you love!</p>
-              <Button asChild>
-                <a href="/">Continue Shopping</a>
-              </Button>
+              <a 
+                href="/"
+                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-10 px-4 py-2 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                Continue Shopping
+              </a>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -60,21 +62,19 @@ const Wishlist = () => {
                       </p>
                     )}
                     <div className="flex gap-2">
-                      <Button 
+                      <button 
                         onClick={() => handleAddToCart(product)}
-                        className="flex-1"
-                        size="sm"
+                        className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-9 px-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
                       >
-                        <ShoppingCart size={16} className="mr-2" />
+                        <ShoppingCart size={16} />
                         Add to Cart
-                      </Button>
-                      <Button 
+                      </button>
+                      <button 
                         onClick={() => removeFromWishlist(product.id)}
-                        variant="outline"
-                        size="sm"
+                        className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium h-9 px-3 border border-input bg-background hover:bg-accent hover:text-accent-foreground transition-colors"
                       >
                         <Trash2 size={16} />
-                      </Button>
+                      </button>
                     </div>
                   </div>
                 </article>
