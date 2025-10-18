@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { useWishlist } from "@/contexts/WishlistContext";
+import { useWishlist } from "@/App";
 import { Heart, ShoppingCart, Trash2 } from "lucide-react";
 
 const Wishlist = () => {

@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import { useWishlist } from "@/contexts/WishlistContext";
+import { useWishlist } from "@/App";
 
 interface ProductCardProps {
   id: string;

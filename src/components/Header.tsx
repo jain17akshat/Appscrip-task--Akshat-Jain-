@@ -1,5 +1,5 @@
 import { Heart, ShoppingCart, Search, User, Menu, Package } from "lucide-react";
-import { useWishlist } from "@/contexts/WishlistContext";
+import { useWishlist } from "@/App";
 
 export const Header = () => {
   const { wishlist, cart } = useWishlist();
