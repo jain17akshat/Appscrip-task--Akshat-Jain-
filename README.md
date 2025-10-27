@@ -1,1 +1,1 @@
-#href:https://appscrip-task-akshat-jain.vercel.app/
+*https://appscrip-task-akshat-jain.vercel.app/
